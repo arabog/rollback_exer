@@ -97,4 +97,4 @@ workflows:
   my_smoke_test_workflow:
     jobs:
       - create_infrastructure
-      - smoke_test
+      # - smoke_test
