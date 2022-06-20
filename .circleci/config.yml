@@ -57,7 +57,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["SHA256:6B5+9292Z5XDO/4rAHSdzDz5BrJHgTELGmaGsSmaQ9s"] # You can get this ID in the section where you registered the SSH Key
+          fingerprints: ["SHA256:xTR1WQH3teXLeMd78QCdo1oZd/mfVdzlpXA8Gc71vxQ"] # You can get this ID in the section where you registered the SSH Key
       - run:
           name: Install dependencies
           command: |
@@ -96,6 +96,6 @@ workflows:
   # Name the workflow
   my_smoke_test_workflow:
     jobs:
-      - create_infrastructure
-      # - configure_infrastructure
+      # - create_infrastructure
+      - configure_infrastructure
       # - smoke_test
