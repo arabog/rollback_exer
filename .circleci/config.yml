@@ -6,6 +6,7 @@ orbs:
 
 
 commands:
+
   # Exercise: Reusable Job Code
   print_pipeline_id:
     parameters:
@@ -29,40 +30,40 @@ commands:
 
 jobs:
 
-  # create_infrastructure: 
-  #       docker:
-  #         - image: amazon/aws-cli
-  #       steps:
-  #         - checkout
-  #         - run:
-  #             name: Create Cloudformation Stack
-  #             command: |
-  #               aws cloudformation deploy \
-  #               --template-file template.yml \
-  #               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-  #               --region us-east-1
-
+  create_infrastructure: 
+        docker:
+          - image: amazon/aws-cli
+        steps:
+          - checkout
+          - run:
+              name: Create Cloudformation Stack
+              command: |
+                aws cloudformation deploy \
+                --template-file template.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1
 
 
   # Exercise: Config and Deployment
-  configure_infrastructure: 
-    docker:
-      - image: python:3.7-alpine3.11
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints: ["SHA256:xYCz+X0s8iuXaEO1Pw+WjMdLBJRt/zyOoQJba26OnEI"] # You can get this ID in the section where you registered the SSH Key
+  # configure_infrastructure: 
+  #   docker:
+  #     - image: python:3.7-alpine3.11
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints: ["SHA256:xYCz+X0s8iuXaEO1Pw+WjMdLBJRt/zyOoQJba26OnEI"] # You can get this ID in the section where you registered the SSH Key
       
-      - run:
-          name: Install dependencies
-          command: |
-            # install the dependencies needed for your playbook
-            apk add --update ansible 
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           # install the dependencies needed for your playbook
+  #           apk add --update ansible 
 
-      - run:
-          name: Configure server
-          command: |
-            ansible-playbook -i inventory.txt main4.yml       
+  #     - run:
+  #         name: Configure server
+  #         command: |
+  #           ansible-playbook -i inventory.txt main4.yml       
+
 
   # Exercise: Smoke Testing
   # smoke_test:
@@ -92,7 +93,7 @@ workflows:
   # Name the workflow
   my_rollback_workflow:
     jobs:
-      # - create_infrastructure
-      - configure_infrastructure
+      - create_infrastructure
+      # - configure_infrastructure
       # - smoke_test
 
