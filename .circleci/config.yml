@@ -98,7 +98,7 @@ jobs:
 
 workflows:
   # Name the workflow
-  my_workflow:
+  my_rollback_workflow:
     jobs:
       - create_infrastructure
       # - configure_infrastructure
