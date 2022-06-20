@@ -89,14 +89,14 @@ jobs:
               return 1
             fi      
 
-      - destroy_environment
+      # - destroy_environment
 
 
 workflows:
   # Name the workflow
-  my_smoke_test_workflow:
+  my_rollback_workflow:
     jobs:
       # - create_infrastructure
       - configure_infrastructure
       # - smoke_test
-      
+
